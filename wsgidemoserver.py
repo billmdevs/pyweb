@@ -31,7 +31,7 @@ class WSGIServer(object):
 	def set_app(self, application):
 		self.application = application
 
-	def server_forever_accept(self)
+	def server_forever_accept(self):
 		listen_socket = self.listen_socket
 		while True:
 			# New client connection
@@ -79,7 +79,7 @@ class WSGIServer(object):
 		env["SERVER_PORT"] = str(self.server_port) # 7777
 		return env
 
-	def start_response(self, status, response_headers, exc_info=None)
+	def start_response(self, status, response_headers, exc_info=None):
 		# Add necessary server headers
 		server_headers = [
 			("Date", "Mon, 29 Jul 2019 5:39:53 GMT"),
