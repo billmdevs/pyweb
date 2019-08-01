@@ -1,3 +1,5 @@
+# I hear and I forget, I see and I remember, I do and I understand.
+							# Conficius
 import io
 import socket
 import sys
