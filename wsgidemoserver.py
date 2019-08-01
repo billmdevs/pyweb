@@ -14,7 +14,7 @@ class WSGIServer(object):
 			self.address_family,
 			self.socket_type
 		)
-		listen_socket = self.listen_socket()
+		listen_socket =self.listen_socket
 		# Allow to reuse the same address
 		listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 		# Bind
@@ -26,7 +26,7 @@ class WSGIServer(object):
 		self.server_name = socket.getfqdn(host)
 		self.server_port = port
 		# Return headers set by Web framework
-		self.headers.set = []
+		self.headers_set = []
 
 	def set_app(self, application):
 		self.application = application
@@ -45,7 +45,7 @@ class WSGIServer(object):
 		self.request_data = request_data.decode("utf-8")
 		request_data = self.request_data
 		# Print formatted request data like "curl -v"
-		print("",join(f"< {line}\n" for line in request_data.splitlines()))
+		print("".join(f"< {line}\n" for line in request_data.splitlines()))
 		self.parse_request(request_data)
 	
 		# Construct environment dictionary using request data
@@ -116,11 +116,11 @@ def make_server(server_address, application):
 
 if __name__ == "__main__":
 	if len(sys.argv) < 2:
-		sys.exit("Provide a WSGI application object:callable")
+		sys.exit("Provide a WSGI application object as module:callable")
 	app_path = sys.argv[1]
 	module, application = app_path.split(":")
 	module = __import__(module)
 	application = getattr(module, application)
 	httpd = make_server(SERVER_ADDRESS, application)
 	print(f"WSGIServer: Serving HTTP on port {PORT} ...\n")
-	httpd.serve_forever()
+	httpd.server_forever_accept()
