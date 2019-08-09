@@ -40,13 +40,7 @@ def serve_forever():
 			os._exit(0)
 		else: # parent process
 			client_connection.close() # close parent copy and loop over
+			# print(len(clients))
 
 if __name__ == "__main__":
 	serve_forever()
-
-	http_response = b"""HTTP/1.1 200 OK
-
-Hello, World!
-"""
-	client_connection.sendall(http_response)
-	client_connection.close()
